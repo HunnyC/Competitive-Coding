@@ -1,2 +1,2 @@
 # Competitive-Coding
-Coding question of various platform
+Coding questions of various platform
