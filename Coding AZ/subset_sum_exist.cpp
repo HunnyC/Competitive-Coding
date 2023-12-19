@@ -10,8 +10,8 @@ vector<vector<int>>dp;
 int rec(int label,int t)
 {
     if(t<0)return 0;
-    if(label>=n)return 0;
-    if(label==n-1)
+    if(label>n)return 0;
+    if(label==n)
     {
         if(t==0)return 1;
         return 0;
