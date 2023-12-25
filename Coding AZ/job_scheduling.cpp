@@ -66,7 +66,7 @@ void solve()
         while(hi>=low)
         {
             int mid=(low+hi)/2;
-            if(jb[mid].end<jb[i].start)
+            if(jb[i].end<jb[mid].start)
             {
                 hi=mid-1;
                 a=mid;
