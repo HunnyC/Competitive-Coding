@@ -20,14 +20,34 @@ if(a==1)return 1;
 }
 void solve()
 {
-    ll n;
+    int n;
     cin>>n;
-    for(int i=1;i<=n;i++){
-    ll a=i*i;
-    a=(a-1)*a/2;
-    cout<<(a-4*(i-1)*(i-2))<<endl;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+        
     }
-    
+    vector<int>lis;
+    for(int i=0;i<n;i++)
+    {
+        if(lis.empty()||lis.back()<=a[i])
+        {  
+            if(lis.empty())
+            lis.push_back(a[i]);
+            else
+            if(lis.back()!=a[i]);
+            lis.push_back(a[i]);
+            
+        }
+        else
+        {
+            auto it=lower_bound(lis.begin(),lis.end(),a[i]);
+            *it=a[i];
+        }
+        
+    }
+    cout<<lis.size();
     
     
     
@@ -39,7 +59,7 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);cout.tie(0);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
         solve();

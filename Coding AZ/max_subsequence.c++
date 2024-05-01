@@ -18,64 +18,66 @@ if(a==1)return 1;
   }
 return  ans;
 }
-int dp[1011];
-int n;
-int a[100];
-int rec(int level)
+
+//nlogn 
+void solve2()
 {
-   // pruning
-   if(level<0)return 0;
-
-
-   //base case;
-
-   //cache dp
-   if(dp[level]!=-1)
-   return dp[level];
-   //computation
-   int ans = 1;
-   for(int j=0;j<level;j++)
-   {
-    if(a[j]<a[level])
-    {
-        ans = max(ans,1+rec(j));
-    }
-   }
-   
-   return dp[level]=ans;
-
-   
-   
-
-   
-}
-
-void solve()
-{
-   cin>>n;
-   memset(dp,-1,sizeof(dp));
-   for(int i=0;i<n;i++)
-   {
-    cin>>a[i];
-   }
- 
-  int best=0;
+  int n;
+  cin>>n;
+  int a[n];
   for(int i=0;i<n;i++)
   {
-    best=max(best, rec(i));
+    cin>>a[i];
   }
-   cout<<"best"<<" "<<best;
-   
+  vector<int>lis;
+  int inserted[n];
+  for(int i=0;i<n;i++)
+  {
+    if(lis.empty()||lis.back()<a[i])
+    {
+      lis.push_back(a[i]);
+      inserted[i]=lis.size();
+    }
+    else
+    {
+      auto it=lower_bound(lis.begin(),lis.end(),a[i]);
+      *it=a[i];
+      inserted[i]=it-lis.begin()+1;
+    }
+  }
+  for(auto it:inserted)
+  {
+    cout<<it<<" ";
+  }
+  cout<<endl;
+  vector<int> finalans;
+  int curlen=lis.size();
+  for(int i=n-1;i>=0;i--)
+  {
+    if(inserted[i]==curlen)
+    {
+        finalans.push_back(a[i]);
+        curlen--;
+    }
+  }
+  reverse(finalans.begin(),finalans.end());
+  for(auto it:finalans)
+  {
+    cout<<it<<" ";
+  }
+  cout<<endl;
+  cout<<"Max length "<<lis.size()<<endl;
+
 }
 int main()
 {
    ios_base::sync_with_stdio(0);
    cin.tie(0);cout.tie(0);
    int t=1;
-   // cin>>t;
+  //  cin>>t;
    while(t--)
    {
-       solve();
-       cout<<endl;
+       solve2();
+      // cout<<endl;
    }
 }

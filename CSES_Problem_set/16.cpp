@@ -33,49 +33,44 @@ ll powi(ll a,ll b,ll p)
           return (ans*ans)%mod;
     }
 }
-vector<pair<int,int>>v;
-int tower(int n,int a,int b,int c)
+
+       
+
+vector<int>v;
+int n;
+ll rec(int i,ll sum1,ll sum2)
 {
-        
-        if(n==1)
-        {
-           
-            v.push_back({a,c});
-            return  1;
-        }
-      
-       
-        int cnt=1;
-       cnt+=tower(n-1,a,c,b);
-        v.push_back({a,c});
-       cnt+=tower(n-1,b,a,c);
-      
-       return cnt;
-
-       
-
+    if(i==n)
+    {
+        return abs(sum1-sum2);
+    }
+    ll ans=0;
+    ans=min(rec(i+1,sum1+v[i],sum2),rec(i+1,sum1,sum2+v[i]));
+    return ans;
 }
 void solve()
 {
-    int n;
+    
     cin>>n;
-   cout<<tower(n,1,2,3)<<endl;
-   for(auto it:v)
-   {
-    cout<<it.first<<" "<<it.second<<endl;
-   }
-
-
-
-
-
-
-
-
-
-
-
+    for(int i=0;i<n;i++)
+    {
+        int t;
+        cin>>t;
+        v.push_back(t);
     }
+   cout<<rec(0,0,0);
+
+
+
+
+
+
+
+
+
+
+
+}
    
     
     
